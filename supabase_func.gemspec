@@ -5,8 +5,8 @@ require_relative "lib/supabase_func/version"
 Gem::Specification.new do |spec|
   spec.name = "supabase_func"
   spec.version = SupabaseFunc::VERSION
-  spec.authors = ["sivalaxman7"]
-  spec.email = ["sivalaxman.mylapilli@cogoport.com"]
+  spec.authors = ["sivalaxman07"]
+  spec.email = ["mylapillisivalaxman@gmail.com"]
 
   spec.summary = "Ruby Client library to interact with Supabase Functions."
   spec.description = "Ruby Client library to interact with Supabase Functions."
@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
+  # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/sivalaxman07/supabase-rubyfunc"
