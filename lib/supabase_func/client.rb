@@ -26,13 +26,13 @@ module SupabaseFunc
       # invoke_options : object with the following properties
       # `headers`: object representing the headers to send with the request
       # `body`: the body of the request
-      # `responseType`: how the response should be parsed. The default is `json`
+      # `response_type`: how the response should be parsed. The default is `json`
       # Returns
       # -------
       # Hash with data and/or error message
       headers = invoke_options.fetch(:headers, {})
       body = invoke_options[:body]
-      response_type = invoke_options.fetch(:responseType, 'json')
+      response_type = invoke_options.fetch(:response_type, 'json')
 
       url = "#{@base_url}/#{function_name}"
       headers['Content-Type'] ||= 'application/json'

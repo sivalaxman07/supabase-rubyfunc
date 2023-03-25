@@ -14,8 +14,8 @@ RSpec.describe SupabaseFunc::FunctionsClient do
 
     context 'when the request is successful' do
       let(:function_name) { 'my_function' }
-      let(:invoke_options) { { headers: { 'Content-Type' => 'application/json' }, body: { name: 'John' }.to_json } }
-      let(:response_body) { { message: 'Hello, John!' } }
+      let(:invoke_options) { { headers: { 'Content-Type' => 'application/json' }, body: { name: 'Siva' }.to_json ,response_type: 'json'} }
+      let(:response_body) { { message: 'Hello, Siva!' } }
 
       before do
         stub_request(:post, "http://localhost:3000/#{function_name}")
@@ -25,7 +25,7 @@ RSpec.describe SupabaseFunc::FunctionsClient do
 
       it 'returns the function response' do
         response = client.invoke(function_name, invoke_options)
-        expect(response).to eq({ data: response_body, error: nil })
+        expect(response).to eq({ data: response_body.to_json, error: nil })
       end
     end
 
