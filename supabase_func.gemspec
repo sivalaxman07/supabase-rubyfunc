@@ -3,7 +3,7 @@
 require_relative "lib/supabase_func/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "supabase_func"
+  spec.name = "supafunc"
   spec.version = SupabaseFunc::VERSION
   spec.authors = ["sivalaxman07"]
   spec.email = ["mylapillisivalaxman@gmail.com"]

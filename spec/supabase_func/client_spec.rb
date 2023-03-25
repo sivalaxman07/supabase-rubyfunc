@@ -1,52 +1,52 @@
-require "httpx"
+# frozen_string_literal: true
 
-RSpec.describe SupabaseFunc::FunctionsClient do
-  let(:url) { "https://supabase.com" }
-  let(:headers) { { "Content-Type" => "application/json" } }
-  let(:client) { SupabaseFunc::FunctionsClient.new(url, headers) }
+require "spec_helper"
 
-  describe "#set_auth" do
+RSpec.describe SupabaseFunc::Client do
+  describe "#setauth" do
     it "updates the authorization header with the given token" do
-      token = "mytoken"
-      client.set_auth(token)
-      expect(client.instance_variable_get(:@headers)["Authorization"]).to eq("Bearer #{token}")
+      client = SupabaseFunc::Client.new("http://localhost:3000")
+      client.setauth("my_token")
+      expect(client.class.headers["Authorization"]).to eq("Bearer my_token")
     end
   end
 
-  describe '#invoke' do
-    let(:function_name) { 'docs' }
-    
-    context 'when the request is successful' do
-      let(:invoke_options) { { headers: {}, body: {} } }
-      let(:response_body) { { message: 'Hello, world!' } }
-      
+  describe "#invoke" do
+    let(:client) { SupabaseFunc::Client.new("http://localhost:3000") }
+
+    context "when the request is successful" do
+      let(:function_name) { "my_function" }
+      let(:options) do
+        { headers: { "Content-Type" => "application/json" }, body: { name: "Siva" }.to_json, response_type: "json" }
+      end
+      let(:response_body) { { message: "Hello, Siva!" } }
+
       before do
         stub_request(:post, "http://localhost:3000/#{function_name}")
-          .with(headers: { 'Content-Type' => 'application/json' })
+          .with(headers: { "Content-Type" => "application/json" })
           .to_return(status: 200, body: response_body.to_json)
       end
-      
-      it 'returns the function response' do
-        result = client.invoke(function_name, invoke_options)
-        expect(result[:data]).to eq(response_body)
-        expect(result[:error]).to be_nil
+
+      it "returns the function response" do
+        response = client.invoke(function_name, options)
+        expect(response).to eq({ data: response_body.to_json, error: nil })
       end
     end
-    
-    context 'when the request fails' do
-      let(:invoke_options) { { headers: {}, body: {} } }
-      let(:response_body) { { error: 'Function not found' } }
-      
+
+    context "when the request fails" do
+      let(:function_name) { "my_function" }
+      let(:options) { { headers: { "Content-Type" => "application/json" }, body: { name: "John" }.to_json } }
+      let(:response_body) { { message: "Function not found" } }
+
       before do
         stub_request(:post, "http://localhost:3000/#{function_name}")
-          .with(headers: { 'Content-Type' => 'application/json' })
+          .with(headers: { "Content-Type" => "application/json" })
           .to_return(status: 404, body: response_body.to_json)
       end
-      
-      it 'returns an error message' do
-        result = client.invoke(function_name, invoke_options)
-        expect(result[:data]).to be_nil
-        expect(result[:error]).to eq('HTTP error 404')
+
+      it "returns an error message" do
+        response = client.invoke(function_name, options)
+        expect(response).to eq({ data: nil, error: "HTTP error 404" })
       end
     end
   end
