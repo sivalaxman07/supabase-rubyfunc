@@ -1,4 +1,4 @@
-require "httpx"
+require "httparty"
 
 RSpec.describe SupabaseFunc::FunctionsClient do
   let(:url) { "https://supabase.com" }
