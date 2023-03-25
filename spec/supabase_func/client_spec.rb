@@ -21,7 +21,7 @@ RSpec.describe SupabaseFunc::FunctionsClient do
       let(:response_body) { { message: 'Hello, world!' } }
       
       before do
-        stub_request(:post, "http://localhost:3000/functions/#{function_name}")
+        stub_request(:post, "http://localhost:3000/#{function_name}")
           .with(headers: { 'Content-Type' => 'application/json' })
           .to_return(status: 200, body: response_body.to_json)
       end
@@ -38,7 +38,7 @@ RSpec.describe SupabaseFunc::FunctionsClient do
       let(:response_body) { { error: 'Function not found' } }
       
       before do
-        stub_request(:post, "http://localhost:3000/functions/#{function_name}")
+        stub_request(:post, "http://localhost:3000/#{function_name}")
           .with(headers: { 'Content-Type' => 'application/json' })
           .to_return(status: 404, body: response_body.to_json)
       end
