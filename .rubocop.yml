@@ -1,5 +1,12 @@
+inherit_mode:
+  merge:
+    - Exclude
 AllCops:
   TargetRubyVersion: 2.6
+  SuggestExtensions: false
+  Exclude:
+    - 'spec/**/*.rb'
+    - 'bin/**/*'
 
 Style/StringLiterals:
   Enabled: true
