@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    supabase_func (0.1.0)
+    supafunc (0.1.0)
       httparty
 
 GEM
@@ -69,7 +69,7 @@ DEPENDENCIES
   rake (~> 13.0)
   rspec
   rubocop (~> 1.21)
-  supabase_func!
+  supafunc!
   webmock
 
 BUNDLED WITH
